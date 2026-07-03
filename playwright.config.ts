@@ -12,8 +12,8 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
-  //testDir: 'src/test', //for pages
+  //testDir: './tests',
+  testDir: 'src/test', //for pages
 
   //tags
   //grep:/@sanity/,
@@ -40,7 +40,8 @@ export default defineConfig({
   //workers: process.env.CI ? 1 : undefined,
   //workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html'],['list'],['allure-playwright']],
+  //reporter: [['html'],['list'],['allure-playwright']],
+  reporter: [['html'],['list']],
 
   /*reporter:[
             ['html',{open:'always',outputFolder:'my-report'}],
