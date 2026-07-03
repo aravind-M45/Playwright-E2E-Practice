@@ -16,3 +16,4 @@ screenshots/
 traceReport.zip
 results.json
 results.xml
+.env
