@@ -1,0 +1,22 @@
+[
+  {
+    "email":"speed01@gmail.com",
+    "password":"test@123",
+    "validity":"Valid"
+  },
+  {
+    "email":"userorg@gmail.com",
+    "password":"test@123",
+    "validity":"invalid"
+  },
+  {
+    "email":"qa@gmail.com",
+    "password":"test@123",
+    "validity":"invalid"
+  },
+  {
+    "email":"",
+    "password":"",
+    "validity":"invalid"
+  }
+]

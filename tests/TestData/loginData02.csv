@@ -1,0 +1,5 @@
+email,password,validity
+speed01@gmail.com,test@123,Valid
+spe1@gmail.com,test@123,inValid
+spee1@gmail.com,test@123,inValid
+,,inValid

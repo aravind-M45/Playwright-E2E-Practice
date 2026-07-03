@@ -1,0 +1,18 @@
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+node_modules/
+allure-report/
+allure-results/
+my-report/
+playwright-report/
+test-results/
+screenshots/
+traceReport.zip
+results.json
+results.xml

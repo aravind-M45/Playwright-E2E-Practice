@@ -1,0 +1,36 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+  await page.getByRole('textbox', { name: 'Username' }).click();
+  await page.getByRole('textbox', { name: 'Username' }).press('CapsLock');
+  await page.getByRole('textbox', { name: 'Username' }).fill('A');
+  await page.getByRole('textbox', { name: 'Username' }).press('CapsLock');
+  await page.getByRole('textbox', { name: 'Username' }).fill('Admin');
+  await page.getByRole('textbox', { name: 'Password' }).click();
+  await page.getByRole('textbox', { name: 'Password' }).press('CapsLock');
+  await page.getByRole('textbox', { name: 'Password' }).press('CapsLock');
+  await page.getByRole('textbox', { name: 'Password' }).fill('admin123');
+  await page.getByRole('button', { name: 'Login' }).click();
+  await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
+  await page.getByRole('link', { name: 'Admin' }).click();
+  await page.getByRole('button', { name: ' Add' }).click();
+  await page.locator('div').filter({ hasText: /^-- Select --$/ }).nth(2).click();
+  await page.getByRole('option', { name: 'Admin' }).click();
+  await page.getByRole('option', { name: 'Enabled' }).click();
+  await page.getByRole('textbox', { name: 'Type for hints...' }).click();
+  await page.getByRole('textbox', { name: 'Type for hints...' }).fill('ben');
+  await page.getByRole('textbox', { name: 'Type for hints...' }).press('ControlOrMeta+a');
+  await page.getByRole('textbox', { name: 'Type for hints...' }).fill('a');
+  await page.getByRole('option', { name: 'Eden Jason Dixxy' }).click();
+  await page.getByRole('textbox').nth(2).click();
+  await page.getByRole('textbox').nth(2).fill('testuser');
+  await page.getByRole('textbox').nth(3).click();
+  await page.getByRole('textbox').nth(3).fill('admin@123');
+  await page.getByRole('textbox').nth(4).click();
+  await page.getByRole('textbox').nth(4).fill('admin@123');
+  await page.getByRole('button', { name: 'Save' }).click();
+  await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers');
+  await expect(page.getByRole('heading', { name: '/ User Management' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'System Users' })).toBeVisible();
+});
