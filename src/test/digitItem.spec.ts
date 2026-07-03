@@ -23,12 +23,3 @@ test("Item creation", async ({ page,request }) => {
     await page.getByRole('button', { name: 'Save', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'E2E_TestItem' })).toBeVisible();
 })
-
-
-
-// import { test, expect } from '@playwright/test';
-
-// test('test', async ({ page }) => {
-
-  
-// });
