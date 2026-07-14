@@ -5,36 +5,42 @@ import { DigitItemPage } from "../pages/digitItem.page";
 let browser: Browser;
 let page: Page;
 
-test.beforeAll(async () => {
-    browser = await chromium.launch();
-    page = await browser.newPage();
 
-    const login = new digitLoginPage(page);
+test.describe("Digit Item", () => {
+    test.beforeAll(async () => {
+        browser = await chromium.launch();
+        page = await browser.newPage();
 
-    await login.navigateToApplication();
-    await login.enterEmail(process.env.DIGIT_EMAIL!);
-    await login.clickContinue();
+        const login = new digitLoginPage(page);
+        await login.navigateToApplication();
+        await login.enterEmail(`${process.env.DIGIT_EMAIL}`);
+        await login.clickContinue();
+        await login.enterPassword(`${process.env.DIGIT_PASSWORD}`);
+        await login.clickContinue();
+        await page.waitForLoadState("networkidle");
+    });
 
-    await login.enterPassword(process.env.DIGIT_PASSWORD!);
-    await login.clickContinue();
+    test.afterAll(async () => {
+        await browser.close();
+    });
 
-    await page.waitForLoadState("networkidle");
-});
+    test("Item creation", async () => {
+        const digitItemPage = new DigitItemPage(page);
+        await digitItemPage.navigateToItemPage();
+        await digitItemPage.selectInventoryItem();
+        await digitItemPage.enterItemName("E2E_TestItem");
+        await digitItemPage.selectUOM();
+        await digitItemPage.saveItem();
+        await digitItemPage.verifyItemCreation();
+    });
 
-test.afterAll(async () => {
-    await browser.close();
-});
-
-test("Item creation", async () => {
-    const digitItemPage = new DigitItemPage(page);
-
-    await digitItemPage.navigateToItemPage();
-    await digitItemPage.selectInventoryItem();
-    await digitItemPage.enterItemName("E2E_TestItem");
-    await digitItemPage.selectUOM();
-    await digitItemPage.saveItem();
-
-    await expect(
-        page.getByRole("heading", { name: "E2E_TestItem" })
-    ).toBeVisible();
+    test("Item deletion", async () => {
+        const digitItemPage = new DigitItemPage(page);
+        await digitItemPage.navigateToItemPage();
+        await digitItemPage.searchItem();
+        await digitItemPage.selectSearchItem();
+        await digitItemPage.openMenu();
+        await digitItemPage.selectDeleteOption();
+        await digitItemPage.confirmItemDeletion();
+    });
 });
