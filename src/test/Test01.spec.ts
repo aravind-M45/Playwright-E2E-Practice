@@ -1,13 +1,11 @@
 
-import {test,expect} from '@playwright/test'
-import { Test01 } from '../pages/testcase01.page';
+import {test} from "../fixtures/TestFixtures";
 
-test("Testcase_01 PageObjectModal",async ({page})=>{
-    const obj=new Test01(page);
-    await obj.navLoginPage();
-    await obj.enterUsername(`${process.env.DEMOBLAZE_USERNAME}`);
-    await obj.enterPassword(`${process.env.DEMOBLAZE_PASSWORD}`);
-    await obj.clickLoginButton();
-    await obj.verifyDetails();
-    await obj.clickLogout();
+test("Testcase_01 PageObjectModal",async ({page,testObj})=>{
+    await testObj.navLoginPage();
+    await testObj.enterUsername(`${process.env.DEMOBLAZE_USERNAME}`);
+    await testObj.enterPassword(`${process.env.DEMOBLAZE_PASSWORD}`);
+    await testObj.clickLoginButton();
+    await testObj.verifyDetails();
+    await testObj.clickLogout();
 })

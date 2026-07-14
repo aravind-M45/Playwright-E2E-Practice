@@ -1,6 +1,6 @@
 // testFixture.ts
 import { test as base,} from '@playwright/test';
-import { Test01 } from '../pages/testcase01.page';
+import { Test01 } from '../pages/Test01.page';
 
 // Extend Playwright's base test with a custom fixture
 
