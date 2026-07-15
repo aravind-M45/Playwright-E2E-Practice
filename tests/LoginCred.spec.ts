@@ -1,5 +1,5 @@
 import {test,expect} from "@playwright/test"
-import { LoginPage } from "../src/pages/pages/login.page";
+import { LoginPage } from "../src/pages/login.page";
 
 test("Login with Valid Credientials",async ({page})=>{
 
