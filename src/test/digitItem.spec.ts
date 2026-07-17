@@ -6,7 +6,7 @@ let browser: Browser;
 let page: Page;
 
 
-test.describe("Digit Item", () => {
+test.describe("Digit Item",{tag:"@digit"}, () => {
     test.beforeAll(async () => {
         browser = await chromium.launch();
         page = await browser.newPage();
