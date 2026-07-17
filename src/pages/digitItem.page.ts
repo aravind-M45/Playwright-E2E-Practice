@@ -20,6 +20,7 @@ export class DigitItemPage {
     readonly deleteCheckbox03: Locator;
     readonly confirmItemDelete: Locator
     readonly noResultsFound: Locator
+    readonly tableRefresh: Locator
 
     constructor(page: Page) {
         this.page = page;
@@ -40,6 +41,7 @@ export class DigitItemPage {
         this.confirmItemDelete = page.getByRole('button', { name: 'Delete item' })
         this.noResultsFound = page.getByText('No results found', { exact: true })
         this.closeItemModal = page.getByLabel('Close dialog')
+        this.tableRefresh=page.getByRole('button', { name: 'Refresh data' })
     }
 
     async navigateToItemPage() {
@@ -92,10 +94,14 @@ export class DigitItemPage {
         await this.deleteCheckbox02.click();
         await this.deleteCheckbox03.click();
         await this.confirmItemDelete.click();
+        await this.verifyItemDeletion()
     }
 
     async verifyItemDeletion() {
-        this.searchItem();
-        expect(this.noResultsFound).toBeVisible();
+        await this.tableRefresh.click();
+        await this.page.waitForLoadState('networkidle')
+        await this.search.clear();
+        await this.searchItem();
+        await expect(this.noResultsFound).toBeVisible();
     }
 }
